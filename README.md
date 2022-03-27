@@ -1,4 +1,4 @@
-# `eleventy-dream-starter`
+# `dream-eleventy-starter`
 
 > Live Demo &nbsp; | &nbsp; [Documentation](#documentation) &nbsp; | &nbsp; [How-To](#how-to)
 
