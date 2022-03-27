@@ -21,8 +21,3 @@ layout: base.njk
 {% set paged = pagination.href %}
 {% set nestedPagination = false %}
 {% include "partials/paginator.njk" %}
-{# {% if pagination.href.previous and (pagination.href.previous | length ) %}<li><a href="{{ pagination.href.previous }}">Previous</a></li>{% endif %}
-{%- for pageEntry in pagination.pages %}
-<li><a href="{{ pagination.hrefs[ loop.index0 ] }}"{% if page.url == pagination.hrefs[ loop.index0 ] %} aria-current="page"{% endif %}>Page {{ loop.index }}</a></li>
-{%- endfor %}
-{% if pagination.href.next and (pagination.href.next | length ) %}<li><a href="{{ pagination.href.next }}">Next</a></li>{% endif %} #}

@@ -10,7 +10,7 @@ An Eleventy starter template. I do not recommend using this for a serious projec
 
 Because Eleventy doesn't have nested pagination (which it really should) the simple demands above remained largely unmet in other themes (although I do appreciate the [vredeburg theme](https://github.com/dafiulh/vredeburg) for having nested pagination for its tag pages.)
 
-Given this, I went ahead and mixed a bunch of code from the best themes, demos, and guides together and created this frankenstein theme.
+Given this, I went ahead and mixed a bunch of code from the best themes, demos, and guides together and created this Frankenstein theme.
 
 <h1 id="table-of-contents">Table of Contents</h1>
 
@@ -50,7 +50,7 @@ I cannot say this enough, but if you do not need multiple author support, use th
 
 ### `.eleventy.js`
 
-Change the `const` `postsPerPaginatedPage` (which is in `.eleventy.js`) to however many posts you want to display on a page. You will need to also change the value in `_src/posts.njk` because that does not use nested pagination.
+Change the `const` `postsPerPaginatedPage` (which is in `.eleventy.js`) to however many posts you want to display on a page. You will also need to change the value in `_src/posts.njk` because that does not use nested pagination.
 
 ### `_data/`
 
@@ -151,7 +151,7 @@ First, read the [disclaimer](#disclaimer).
 
 ### Change how many posts are shown per page...
 
-See the [documentation](#documentation), but in a nutshell, change the both the `postsPerPaginatedPage` `const` in `.eleventy.js` and the pagination size in `_src/posts.njk` to whatever you want.
+See the [documentation](#documentation), but in a nutshell, change both the `postsPerPaginatedPage` `const` in `.eleventy.js` and the pagination size in `_src/posts.njk` to whatever you want.
 
 ### Use author data (such as name and bio) in frontmatter...
 
