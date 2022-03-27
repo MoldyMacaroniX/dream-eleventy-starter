@@ -1,0 +1,17 @@
+[
+	{
+		"key":"john",
+		"name":"John Doe",
+		"bio":"My name is John and I like to bake bread. This is supposed to be a fancy description about me."
+	},
+	{
+		"key":"jane",
+		"name":"Jane Doe",
+		"bio":"I am Jane and I am an author here. This will hopefully be a description that is interesting and unique."
+	},
+	{
+		"key":"joe",
+		"name":"Joe Man",
+		"bio":"I am Joe but my friends call me Joey. I am a professor at some University perhaps."
+	}
+]

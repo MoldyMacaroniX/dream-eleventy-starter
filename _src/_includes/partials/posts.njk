@@ -1,0 +1,15 @@
+<a href="{{ post.url }}"><h2>{{ post.data.title }}</h2></a>
+
+<div>
+	{% if post.data.author %}{% set myAuthor = authors | getAuthor(post.data.author) %}By <a href="/authors/{{ myAuthor.key }}">{{ myAuthor.name }}</a> {% endif %}on {{ post.data.date | readableDate }}{% if post.data.tags %} in{% for tag in post.data.tags %} <a href="/tags/{{ tag | slug }}/">{{ tag | capitalize }}</a>{% endfor %}{% endif %}
+</div>
+
+{% if post.data.desc%}
+<p>
+    {{ post.data.desc }}
+</p>
+{% endif %}
+
+<div>
+    <a href="{{ post.url }}">Read More</a>
+</div>

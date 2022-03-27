@@ -1,0 +1,16 @@
+---
+layout: base.njk
+---
+
+<div>
+	<h1>{{ title }}</h1>
+	<p>
+		{% if author %}{% set myAuthor = authors | getAuthor(author) %}By <a href="/authors/{{ myAuthor.key }}">{{ myAuthor.name }}</a> {% endif %}on {{ date | readableDate }}{% if tags %} in{% for tag in tags %} <a href="/tags/{{ tag | slug }}/">{{ tag | capitalize }}</a>{% endfor %}{% endif %}
+	</p>
+</div>
+
+<div>
+{{ content | safe }}
+</div>
+
+<a href="/posts/">Back To The Archive</a>

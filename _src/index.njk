@@ -1,0 +1,14 @@
+---
+title: Home
+
+layout: base.njk
+---
+
+<h1>Home</h1>
+
+{% for post in collections.posts | head(3) %}
+{% include "partials/posts.njk" %}
+{% endfor %}
+
+<br>
+<a href="/posts/2/">Browse More In The Archive</a>

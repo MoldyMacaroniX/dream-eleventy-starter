@@ -1,0 +1,12 @@
+---
+title: Authors
+permalink: /authors/
+
+layout: base.njk
+---
+
+<h1>Authors</h1>
+
+{% for author in authors | sort(attribute='name') %}
+<li><a href="/authors/{{ author.key }}/">{{ author.name }}</a></li>
+{% endfor %}

@@ -1,0 +1,37 @@
+---
+pagination:
+  data: collections.pagedTags
+  size: 1
+  alias: tag
+  addAllPagesToCollections: true
+permalink: tags/{{ tag.tagName }}/{{ (tag.pageNumber + 1) + "/" if tag.pageNumber }}
+eleventyComputed:
+  title: "{{ tag.tagName | capitalize }}"
+
+layout: base.njk
+---
+
+<h1>{{ tag.tagName | capitalize }}</h1>
+
+{% for post in tag.templateObjets %}
+{% include "partials/posts.njk" %}
+{% endfor %}
+
+<br>
+
+{% set paged = tag %}
+{% set nestedPagination = true %}
+{% set tagPagination = true %}
+{% include "partials/paginator.njk" %}
+
+{# {% if (tag.pageNumber + 1) !== 1 %}<li><a href="{{ pagination.href.previous }}">Previous</a></li>{% endif %}
+
+{% set index = [] %}
+{% for item in collections.pagedTags %}
+    {% if tag.tagName === item.tagName %}
+        <li><a href="{{ item.path }}"{% if page.url == item.path %} aria-current="page"{% endif %}>Page {{ item.pageNumber + 1 }}</a></li>
+        {% set index = (index.push(1), index) %}
+    {% endif %}
+{% endfor %}
+
+{% if (tag.pageNumber + 1) !== index|length %}<li><a href="{{ pagination.href.next }}">Next</a></li>{% endif %} #}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% if pageID == "authorPosts" %}{% set myAuthor = authors | getAuthor(category.title) %}{% endif %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+    {% if pageID !== "authorPosts" %}{{ title or metadata.title }}{% else %}{{ myAuthor.name }}{% endif %} | {{ metadata.title }}
+    </title>
+
+    <link rel="stylesheet" href="/assets/css/index.css">
+</head>
+<body>
+
+    <a href="/">Home</a> | <a href="/posts/">Archive</a> | <a href="/tags/">Tags</a> | <a href="/authors/">Authors</a>
+    <hr>
+
+    <!-- DELETE THIS MESSAGE -->
+    <div style="background-color: rgb(207, 240, 255); padding: 10px 25px; border-radius: 5px; font-family: monospace; margin-top: 20px;">
+        <p>This is a demo of the <a href="https://github.com/MoldyMacaroniX/dream-eleventy-starter">dream-eleventy-starter</a> repository, inspired by <a href="https://github.com/dafiulh/vredeburg">vredeburg</a> and <a href="https://github.com/11ty/eleventy-base-blog">eleventy-base-blog</a>.</p>
+        <ol>
+            <li>Edit the data in <code>_src/_data/metadata.json</code> to fit your preferences.</li>
+            <li>Read the <a href="https://github.com/MoldyMacaroniX/dream-eleventy-starter/blob/master/README.md">README file</a>.</li>
+            <li>Delete this message from <code>_src/_includes/base.njk</code></li>
+        </ol>
+    </div>
+    <!-- STOP DELETING -->
+
+    <div>
+    {{ content | safe }}
+    </div>
+    
+</body>
+</html>

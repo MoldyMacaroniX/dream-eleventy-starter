@@ -1,0 +1,48 @@
+<div style="display: flex; gap: 25px;">
+
+{# "PREVIOUS" LINKS #}
+{% if not tagPagination %}
+    {% if paged.previous and (pagination.href.previous | length ) %}<div><a href="{{ pagination.href.previous }}">Previous</a></div>{% endif %}
+{% else %}
+    {% if (tag.pageNumber + 1) !== 1 %}<div><a href="{{ pagination.href.previous }}">Previous</a></div>{% endif %}
+{% endif %}
+
+
+{# "PAGE NUMBER" LINKS #}
+{% if not nestedPagination %}
+
+    {%- for pageEntry in pagination.pages %}
+    <div{% if page.url == pagination.hrefs[ loop.index0 ] %} style="font-weight: bold;"{% endif %}><a href="{{ pagination.hrefs[ loop.index0 ] }}"{% if page.url == pagination.hrefs[ loop.index0 ] %} aria-current="page"{% endif %}>{{ loop.index }}</a></div>
+    {%- endfor %}
+
+{% else %}
+
+    {% if tagPagination %}
+    {% set index = [] %}
+    {% for item in collections.pagedTags %}
+        {% if tag.tagName === item.tagName %}
+            <div{% if item.path == page.url %} style="font-weight: bold;"{% endif %}><a href="{{ item.path }}"{% if page.url == item.path %} aria-current="page"{% endif %}>{{ item.pageNumber + 1 }}</a></div>
+            {% set index = (index.push(1), index) %}
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    {% if authorPagination %}
+    {% for item in collections.pagedAuthorPosts %}
+        {% if category.title === item.title %}
+            <div{% if (page.url == ("/authors/" + category.title + "/" + (item.pageNumber + 1) + "/")) or ((item.pageNumber == 0) and (page.url == ("/authors/" + category.title + "/"))) %} style="font-weight: bold;"{% endif %}><a href="/authors/{{ category.title }}/{% if item.pageNumber > 0 %}{{ item.pageNumber + 1 }}/{% endif %}"{% if (page.url == ("/authors/" + category.title + "/" + (item.pageNumber + 1) + "/")) or ((item.pageNumber == 0) and (page.url == ("/authors/" + category.title + "/"))) %} aria-current="page"{% endif %}>{{ item.pageNumber + 1 }}</a></div>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
+
+{% endif %}
+
+
+{# "NEXT" LINKS #}
+{% if not tagPagination %}
+    {% if paged.next and (pagination.href.next | length ) %}<div><a href="{{ pagination.href.next }}">Next</a></div>{% endif %}
+{% else %}
+    {% if (tag.pageNumber + 1) !== index|length %}<div><a href="{{ pagination.href.next }}">Next</a></div>{% endif %}
+{% endif %}
+
+</div>
