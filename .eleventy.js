@@ -66,7 +66,7 @@ module.exports = (config) => {
         const pagedTags = [];
         let pagedCollectionMaxIndex;
         [...tagSet].forEach(tag => {
-            const tagCollection = collection.getFilteredByTag(tag);
+            const tagCollection = collection.getFilteredByTag(tag).reverse();
             const pagedCollection = lodashChunk(tagCollection, postsPerPaginatedPage);
             pagedCollection.forEach((templateObjectsArray, index) => {
                 pagedCollectionMaxIndex = index;
