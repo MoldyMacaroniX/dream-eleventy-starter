@@ -1,7 +1,23 @@
 <a href="{{ post.url }}"><h2>{{ post.data.title }}</h2></a>
 
 <div>
-	{% if post.data.author %}{% set myAuthor = authors | getAuthor(post.data.author) %}By <a href="/authors/{{ myAuthor.key }}">{{ myAuthor.name }}</a> {% endif %}on {{ post.data.date | readableDate }}{% if post.data.tags %} in{% for tag in post.data.tags %} <a href="/tags/{{ tag | slug }}/">{{ tag | capitalize }}</a>{% endfor %}{% endif %}
+	{# {% if post.data.author %}{% set myAuthor = authors | getAuthor(post.data.author) %}By <a href="/authors/{{ myAuthor.key }}">{{ myAuthor.name }}</a> {% endif %}on {{ post.data.date | readableDate }}{% if post.data.tags %} in{% for tag in post.data.tags %} <a href="/tags/{{ tag | slug }}/">{{ tag | capitalize }}</a>{% endfor %}{% endif %} #}
+    {% if post.data.author %}
+        {# {% set myAuthor = authors | getAuthor(post.data.author) %}<a href="/authors/{{ myAuthor.key }}" class="author">{{ myAuthor.name }} <i class="ri-user-3-line"></i></a> #}
+
+        {% set isArr = post.data.author | isArray %}
+        {% if isArr %}
+            <span href="#" class="tags">
+                {% for a in post.data.author %}
+                    {% set myAuthor = authors | getAuthor(a) %}<a href="/authors/{{ myAuthor.key }}/">{{ myAuthor.name }}</a>
+                {% endfor %}
+                <i class="ri-user-3-line"></i>
+            </span>
+        {% else %}
+            {% set myAuthor = authors | getAuthor(post.data.author) %}<a href="/authors/{{ myAuthor.key }}/" class="author">{{ myAuthor.name }} <i class="ri-user-3-line"></i></a>
+        {% endif %}
+
+    {% endif %}
 </div>
 
 {% if post.data.desc%}

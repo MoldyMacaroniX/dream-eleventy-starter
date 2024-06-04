@@ -4,9 +4,20 @@ layout: base.njk
 
 <div>
 	<h1>{{ title }}</h1>
-	<p>
+	{# <p>
 		{% if author %}{% set myAuthor = authors | getAuthor(author) %}By <a href="/authors/{{ myAuthor.key }}">{{ myAuthor.name }}</a> {% endif %}on {{ date | readableDate }}{% if tags %} in{% for tag in tags %} <a href="/tags/{{ tag | slug }}/">{{ tag | capitalize }}</a>{% endfor %}{% endif %}
-	</p>
+	</p> #}
+	{% if author %}
+		{% set isArr = author | isArray %}
+		By
+		{% if isArr %}
+			{% for a in author | sort(attribute='key') %}
+				{% if loop.last and author.length != 1 %} and {% endif %}{% set myAuthor = authors | getAuthor(author[loop.index0]) %}<a class="article-meta-author" href="/authors/{{ myAuthor.key }}/">{{ myAuthor.name }}</a>{% if not loop.last and author.length > 2 %}, {% endif %}
+			{% endfor %}
+		{% else %}
+			{% set myAuthor = authors | getAuthor(author) %}<a class="article-meta-author" href="/authors/{{ myAuthor.key }}/">{{ myAuthor.name }}</a>
+		{% endif %}
+	{% endif %}
 </div>
 
 <div>

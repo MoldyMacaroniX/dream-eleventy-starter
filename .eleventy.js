@@ -8,7 +8,9 @@ function getAllKeyValues(collectionArray, key) {
       let values = item.data[key] ? item.data[key] : [];
       return values;
     });
-  
+    
+    // flatten values array
+    allValues = lodash.flattenDeep(allValues);
     // to lowercase
     allValues = allValues.map((item) => item.toLowerCase());
     // remove duplicates
@@ -35,6 +37,10 @@ module.exports = (config) => {
 
     config.addFilter("readableDate", dateObj => {
         return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
+    });
+
+    config.addFilter("isArray", (array) => {
+        return Array.isArray(array);
     });
 
     config.addFilter("getAuthor", (authors,label) => {

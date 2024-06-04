@@ -4,7 +4,9 @@ desc: "Pretend. You pretend the feelings are there, for the world, for the peopl
 tags:
     - three
 date: 2022-03-01
-author: joe
+author:
+    - joe
+    - john
 ---
 
 I'm really more an apartment person. I'm doing mental jumping jacks. Somehow, I doubt that. You have a good heart, Dexter. Keep your mind limber.
