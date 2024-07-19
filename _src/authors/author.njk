@@ -2,14 +2,15 @@
 pagination:
   data: collections.pagedAuthorPosts
   size: 1
-  alias: category
-permalink: authors/{{ category.slug }}/index.html
-
+  alias: author
+permalink: authors/{{ author.slug }}/index.html
+eleventyComputed:
+  title: "{% set myAuthor = authors | getAuthor(author.title) %}{{ myAuthor.name }}"
 pageID: authorPosts
 layout: base.njk
 ---
 
-{% set myAuthor = authors | getAuthor(category.title) %}
+{% set myAuthor = authors | getAuthor(author.title) %}
 
 <h1>{{ myAuthor.name }}</h1>
 
@@ -17,13 +18,13 @@ layout: base.njk
   {{ myAuthor.bio }}
 </p>
 
-{% for post in category.items %}
+{% for post in author.items %}
 {% include "partials/posts.njk" %}
 {% endfor %}
 
 <br>
 
-{% set paged = category.pageSlugs %}
+{% set paged = author.pageSlugs %}
 {% set nestedPagination = true %}
 {% set authorPagination = true %}
 {% include "partials/paginator.njk" %}

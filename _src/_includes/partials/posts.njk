@@ -1,30 +1,23 @@
-<a href="{{ post.url }}"><h2>{{ post.data.title }}</h2></a>
+<a href="{{ post.url }}"><h2>{{ post.data.title or "No title provided." }}</h2></a>
 
-<div>
-	{# {% if post.data.author %}{% set myAuthor = authors | getAuthor(post.data.author) %}By <a href="/authors/{{ myAuthor.key }}">{{ myAuthor.name }}</a> {% endif %}on {{ post.data.date | readableDate }}{% if post.data.tags %} in{% for tag in post.data.tags %} <a href="/tags/{{ tag | slug }}/">{{ tag | capitalize }}</a>{% endfor %}{% endif %} #}
-    {% if post.data.author %}
-        {# {% set myAuthor = authors | getAuthor(post.data.author) %}<a href="/authors/{{ myAuthor.key }}" class="author">{{ myAuthor.name }} <i class="ri-user-3-line"></i></a> #}
+{# Show authors if there are any #}
+{% if post.data.author %}
 
-        {% set isArr = post.data.author | isArray %}
-        {% if isArr %}
-            <span href="#" class="tags">
-                {% for a in post.data.author %}
-                    {% set myAuthor = authors | getAuthor(a) %}<a href="/authors/{{ myAuthor.key }}/">{{ myAuthor.name }}</a>
-                {% endfor %}
-                <i class="ri-user-3-line"></i>
-            </span>
-        {% else %}
-            {% set myAuthor = authors | getAuthor(post.data.author) %}<a href="/authors/{{ myAuthor.key }}/" class="author">{{ myAuthor.name }} <i class="ri-user-3-line"></i></a>
-        {% endif %}
+    {# Will convert a single author into an array so it can be parsed the same as multiple authors. #}
+    {% set postAuthors = post.data.author | makeArray %}
 
-    {% endif %}
-</div>
+    {# Loops through each author #}
+    {% for a in postAuthors %}
+        {% set myAuthor = authors | getAuthor(a) %}
+        {# Frontend code to show author: #}
+        <a href="/authors/{{ myAuthor.key }}/">{{ myAuthor.name }}</a>
+    {% endfor %}
 
-{% if post.data.desc%}
-<p>
-    {{ post.data.desc }}
-</p>
 {% endif %}
+
+<p>
+    {{ post.data.desc or "No description provided." }}
+</p>
 
 <div>
     <a href="{{ post.url }}">Read More</a>

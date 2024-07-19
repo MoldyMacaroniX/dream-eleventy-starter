@@ -1,6 +1,4 @@
 ---
-title: "Need More Time? Read These Tips To Eliminate Debt"
-desc: "I love Halloween. The one time of year when everyone wears a mask … not just me. I'm really more an apartment person. Under normal circumstances, I'd take that as a compliment. This man is a knight in shining armor."
 tags:
     - two
     - three

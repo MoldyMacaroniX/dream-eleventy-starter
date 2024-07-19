@@ -31,31 +31,80 @@ module.exports = (config) => {
     config.addPassthroughCopy('_src/assets');
     config.addPassthroughCopy({'_src/static':  '.'});
 
+    /**
+     * Collection containing all posts
+     * @param {any} collection - The date
+     * @returns {any} - all posts
+     */
     config.addCollection("posts", function(collection) {
         return collection.getFilteredByGlob("_src/posts/*.md").reverse();
     });
 
+    /**
+     * Returns true if the input is an array, false otherwise.
+     * @param {any} dateObj - The date
+     * @returns {any} - The date in a readable form
+     */
     config.addFilter("readableDate", dateObj => {
         return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
     });
 
-    config.addFilter("isArray", (array) => {
-        return Array.isArray(array);
+    /**
+     * Returns true if the input is an array, false otherwise.
+     * @param {any} maybeArray - The input in question.
+     * @returns {boolean} - The input inside an array - or itself if the input was an array.
+     */
+    config.addFilter("isArray", (maybeArray) => {
+        return Array.isArray(maybeArray);
     });
 
+    /**
+     * Turns a non-array into an array, or does nothing if it is already an array.
+     * @param {any} maybeArray - The input. If it is not an array, it will be turned into an array. If it is already an array, it will do nothing.
+     * @returns {array} - The input inside an array - or itself if the input was an array.
+     */
+    config.addFilter("makeArray", (maybeArray) => {
+        if (Array.isArray(maybeArray)) {
+            return maybeArray;
+        }
+        return arr = [maybeArray];
+    });
+
+    /**
+     * Gets data for an author
+     * @param {any} authors
+     * @param {any} label
+     * @returns {any} - Data structure containing all author data
+     */
     config.addFilter("getAuthor", (authors,label) => {
         let author = authors.filter(a => a.key === label)[0];
 	    return author;
     });
 
+    /**
+     * Get posts from an author
+     * @param {any} posts - all posts
+     * @param {any} author - the author who's posts you want
+     * @returns {any} - All of that author's posts
+     */
     config.addFilter("getPostsByAuthor", (posts,author) => {
         return posts.filter(a => a.data.author === author);
     });
 
+    /**
+     * Collection for all blog posts
+     * @param {any} collection
+     * @returns {any} - Collection of all blog posts
+     */
     config.addCollection("blogposts", function (collection) {
         return collection.getFilteredByGlob("./src/blogposts/*.md").reverse();
     });
 
+    /**
+     * collection for all posts, double-layer paginated by tag
+     * @param {any} collection
+     * @returns {any} - double-layered paginated by tag list of all posts
+     */
     config.addCollection("pagedTags", function(collection) {
         const postsCollection = collection.getFilteredByGlob('_src/posts/*.md');
         let tagSet = new Set();
@@ -98,6 +147,11 @@ module.exports = (config) => {
         return pagedTags;
     });
 
+    /**
+     * collection for all posts, double-layer paginated by author
+     * @param {any} collection
+     * @returns {any} - double-layered paginated by author list of all posts
+     */
     config.addCollection("authorPosts", function (collection) {
         let allCategories = getAllKeyValues(
           collection.getFilteredByGlob("_src/posts/*.md"),
@@ -168,6 +222,11 @@ module.exports = (config) => {
         return blogpostsByCategories;
     });
 
+    /**
+     * collection for all tags
+     * @param {any} collection
+     * @returns {any} - Data structure containing all tags
+     */
     config.addCollection("tagList", function(collection) {
         let tagSet = new Set();
         collection.getAll().forEach(item => {
@@ -177,7 +236,12 @@ module.exports = (config) => {
         return tagSet;
     });
 
-    // Get the first `n` elements of a collection.
+    /**
+     * Gets the first `n` elements of a collection.
+     * @param {any} array - the collection in question
+     * * @param {any} n - first `n` elements to get
+     * @returns {any} - the first `n` elements of the collection
+     */
     config.addFilter("head", (array, n) => {
         if(!Array.isArray(array) || array.length === 0) {
         return [];
